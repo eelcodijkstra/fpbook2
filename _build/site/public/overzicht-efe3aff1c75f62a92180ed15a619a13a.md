@@ -1,0 +1,106 @@
+# Overzicht
+
+## Eerste kennismaking
+
+
+| Hoofdstuk | onderdelen | |
+| :-- | :-- | :-- |
+| 1 | waarden, expressies en namen | |
+| 1 | functies: definitie en toepassing | |
+| 2 | typering, samengestelde waarden, lijsten | |
+| 2 | typering van functies | |
+| 3 | functies als waarden; map, fold | |
+| 4 | zelf-gedefinieerde data-types
+
+
+## Waarden, expressies en namen
+
+concepten: waarde, expressie, operator, operator-prioriteit (precedentie?), naam-definitie, naam-gebruik, rekenen/herschrijven (berekening) 
+
+* een expressie *beschrijft* een berekening. Wanneer deze berekening uitgevoerd wordt, is het resultaat van deze berekening een *waarde* (getal, string, enz.)
+* een expressie bestaat uit waarden (voorlopig alleen gehele getallen), operatoren (en functies? bijv. div, mod?, abs, neg?, succ, pred)
+* functie-toepassing (applicatie, aanroep) heeft in Haskell de vorm: `f 3` - de naam van de functie met daarachter het argument.
+    * in plaats van `f(3)`
+
+voorbeelden: enkele uitgewerkte berekeningen
+
+opdrachten: uitwerken van enkele berekeningen
+
+## Functies
+concepten: functie-definitie, functie-naam, parameters, functie-toepassing (applicatie, aanroep), argumenten
+
+* een functie kun je zien als de *abstractie* van een berekening: de interface beschrijft het effect(?), de expressie (body) de implementatie: de berekening voor het bereiken van dat effect.
+    * in het geval van functies kun je het effect beschrijven als een relatie tussen de parameters en het resultaat.
+    * een voorbeeld is ggd x y - het *effect* is: het grootste getal dat zowel een deler is van x als van y; dit zegt nog niets over de manier waarop je dit kunt berekenen. (Dit is overigens een klassiek informatica-voorbeeld.)
+    * een ander voorbeeld: sort xs - het *effect* is: 
+* een functie kun je (ook) zien als een *uitgestelde berekening*, vanwege het ontbreken van de waarden van de parameters. Zodra deze bekend zijn, bij functie-applicatie, kun je de berekening uitvoeren.
+
+
+voorbeelden: sqr (definitie en toepassing), succ (en functies met twee parameters?)
+
+opdrachten: uitwerken van enkele berekeningen; def. van double
+
+## Types en waarden
+concepten:
+
+voorbeelden:
+
+### Elementaire types
+concepten: typering van waarden; typering van functies
+
+Getallen, tekens, boolean
+
+voorbeelden:
+
+### Samengestelde types
+Strings, lijsten; tupels
+
+### Typering van functies
+(In het bijzonder ook: functies van meerdere parameters.)
+
+## Functies als waarden
+
+* anonieme functie-waarden: lambda-expressies
+    * (overeenkomst tussen lambda-expressie en regel voor functie-applicatie: `let`)
+* map
+* foldl, foldr, (reduce)
+* filter
+* zip (tupels en lijsten)
+* functies met meerdere parameters; partiële parametrisatie (Currying)
+
+(De uitdaging van het gebruik van map, foldl, filter enz. is om te denken in complete lijsten, niet in de afzonderlijke elementen.)
+
+(Bij dit hoofdstuk moeten we een redelijk groot aantal oefeningen hebben, om leerlingen vertrouwd te maken met de verschillende begrippen en de manier waarop je die gebruikt. Een aantal kleine voorbeelden moet met de hand uitgewerkt worden, voor een beter begrip.)
+
+## Zelf-gedefinieerde data-types
+
+* constructors (met parameters)
+* functie-definities met *pattern matching* (eigenlijk: "de-constructie")
+* voorbeelden:
+    * grafische (geometrische vormen) - cirkel, rechthoek, driehoek, trapezium, ster?
+        * bepalen van oppervlakte
+        * 
+    * expressie - operator met operanden, (bijv. +, -. *. mod, div); functie met argumenten?
+(De voorbeelden in dit hoofdstuk bereiden voor op de "logische" uitbreiding naar groepering, en daarmee naar recursie.)
+
+(Eigenlijk zou ik de vormen zo willen definiëren dat je deze ook kunt tekenen; dan moeten we ook met coördinaten werken, bijvoorbeeld in de vorm van tupels.)
+
+## Recursie: data-types en functies
+
+* recursieve data-types
+    * grafische vormen - met groepering
+    * expressies - met sub-expressies
+* recursieve functies voor recursieve data
+    * grafische vormen, bijv. berekenen van oppervlak (of: omzetten in SVG)
+    * expressies, bijv. evaluatie
+* binaire bomen
+* generieke bomen (met willekeurig aantal kinderen)
+* bomen in de informatica
+    * recursieve structuren (o.a file system; en eerdere genoemde voorbeelden)
+    * zoekbomen
+* lijsten - en functies op lijsten (sum, max, lst_sqr)
+
+## Generieke functies (map enz.)
+
+* definities van map, foldl (en foldr)
+* (en nog enkele andere functies)

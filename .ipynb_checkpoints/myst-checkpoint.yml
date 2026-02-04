@@ -1,0 +1,47 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+exports:
+  - format: pdf
+    template: plain_latex_book
+    output: exports/fpbook2.pdf
+    articles:
+    - root.md
+    - inleiding.md
+    - overzicht.md
+    - file: nb1.ipynb
+    - file: nb3.ipynb
+    - file: nb4.ipynb
+    - file: nb5.ipynb
+    - voor-de-docent.md
+    - over-deze-module.md
+project:
+  id: 10c86549-6273-452e-a97e-d2c5cd01e290
+  # title:
+  # description:
+  # keywords: []
+  # authors: []
+  # github:
+  # To autogenerate a Table of Contents, run "myst init --write-toc"
+  toc:
+    - file: root.md
+    - file: inleiding.md
+    - file: overzicht.md
+    - file: nb1.ipynb
+    - file: nb3.ipynb
+    - file: nb4.ipynb
+    - file: nb5.ipynb
+    - file: nb8.ipynb
+    - file: nb10.ipynb
+    - file: nb11.ipynb
+    - file: notatie.ipynb
+    - file: begrippen.md
+    - file: voor-de-docent.md
+    - file: over-deze-module.md
+    - file: nb2.ipynb  
+    - file: svg-display.ipynb
+
+site:
+  template: book-theme
+  # options:
+  #   favicon: favicon.ico
+  #   logo: site_logo.png

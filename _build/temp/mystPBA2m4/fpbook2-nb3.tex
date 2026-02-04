@@ -1,0 +1,227 @@
+\section{Typering en lijsten}
+
+Tot nu toe hebben we alleen gewerkt met gehele getallen als waarden.
+Maar Haskell biedt meerdere soorten waarden, zoals floating point getallen, tekens (characters),
+strings, tupes., lijsten, enz.
+
+Het \textit{type} van een waarde geeft de soort aan. Het type van een waarde bepaalt welke operaties (functies, operatoren) er voor die waarde mogelijk zijn. Door deze typering kan het Haskell systeem  controleren of in een berekening de waarden en de operaties bij elkaar passen. Je kunt bijvoorbeeld niet een string optellen bij een getal: optellen (\texttt{+}) is alleen gedefinieerd voor getallen.
+
+\begin{verbatim}
+3 + 'a'
+\end{verbatim}
+
+\begin{verbatim}
+Runtime error: error: "<repl>": line 8, col 3: Cannot satisfy constraint: (Num Char)
+     fully qualified: (Data.Num.Num Primitives.Char)
+\end{verbatim}
+
+We hebben in Haskell te maken met:
+
+\begin{itemize}
+\item elementaire waarden, zoals getallen, tekens, en boolean waarden;
+\item samengestelde waarden, zoals lijsten en tupels;
+\item functie-waarden;
+\item waarden van zelf-gedefinieerde \textit{data-types}.
+\end{itemize}
+
+In dit hoofdstuk behandelen we de eerste twee. In de volgende hoofdstukken komen de andere types en waarden aan de orde.
+
+\textbf{Elementaire waarden.}
+
+\begin{itemize}
+\item type: \texttt{Int} - voorbeeld: \texttt{31415926}
+\item type: \texttt{Float} - voorbeeld: \texttt{3.1415926}, \texttt{2.3e5}
+\item type \texttt{Char} - voorbeeld: \texttt{'A'}, \texttt{'\#'}
+\item type \texttt{Bool} - voorbeelden: \texttt{False}, \texttt{True}
+\end{itemize}
+
+Als je een naam definieert, zoals in \texttt{a = 10}, dan bepaalt het Haskell-systeem het type van de naam op basis van het type van de waarde (expressie).
+
+\textbf{Samengestelde waarden.}
+
+Een samengestelde waarde bevat (mogelijk meerdere) waarden van andere types. Voorbeelden van samengestelde waarden zijn lijsten en tupels.
+
+\textbf{Lijsten.}
+
+\begin{itemize}
+\item een lijst bevat 0 of meer waarden van \textit{eenzelfde type}
+\item als \texttt{a} een type is, dan is \texttt{[a]} het type van een ``lijst van a-waarden''
+
+\begin{itemize}
+\item \texttt{[]} - de lege lijst
+\item \texttt{[1, 3, 5] } - lijst van gehele getallen -  type: \texttt{[Int]}
+\item \texttt{[3.4, 120e10, -7.5]} - lijst van floating point getallen - type: \texttt{[Float]}
+\item \texttt{['a', 'b', '*']} - lijst van tekens - type: \texttt{[Char]}
+\end{itemize}
+\end{itemize}
+
+Deze laatste waarde kun je ook schrijven als \texttt{"ab*"}. Het type \texttt{[Char]} noemen we meestal \texttt{String}.
+
+In deze voorbeelden hebben we alleen letterlijke waarden in de lijsten opgenomen. Maar je kunt de elementen van een lijst ook uitrekenen met expressies (van het juiste type), bijvoorbeeld: \texttt{[1, a*12, abs (b - 7)]}
+
+\begin{verbatim}
+['a', 'b', '*']
+\end{verbatim}
+
+\begin{verbatim}
+"ab*"
+\end{verbatim}
+
+\textbf{Verkorte notatie.} Voor lijsten met opeenvolgende gehele getallen is er een speciale verkorte notatie: \texttt{[a..b]} staat voor een lijst met alle getallen van \texttt{a} tot en met \texttt{b}. Bijvoorbeeld: \texttt{[3..6] = [3,4,5,6]}.
+
+Een andere beknopte manier om een lijst te genereren is met behulp van \textit{list comprehension}, zie XXXX.
+
+\textbf{Lijst-constructor: cons.} De operator \texttt{:} (spreek uit: \textit{cons}) kun je gebruiken om een element op kop van een lijst toe te voegen, bijvoorbeeld: \texttt{3 : [5, 7]} geeft \texttt{[3, 5, 7]}.
+
+Je kunt de lijst \texttt{[3, 5, 7]} dan zien als een verkorte notatie voor: \texttt{3 : (5 : (7 : [])))} of korter: \texttt{3 : 5 : 7 : []}. (De lijst-constructor \textit{cons} is \textit{rechts-associatief}.)
+
+\begin{verbatim}
+[3..12]
+\end{verbatim}
+
+\begin{verbatim}
+[3,4,5,6,7,8,9,10,11,12]
+\end{verbatim}
+
+\textbf{Operaties op lijsten}
+
+Wat kun je met lijsten? Welke opdrachten/functies zijn mogelijk?
+
+\begin{itemize}
+\item aaneenrijgen (concatenatie): \texttt{++} - voorbeeld: \texttt{[1, 2] ++ [3, 4]} of \texttt{"aap" + "noot" + "mies"}
+\item kop-element van een lijst: \texttt{head "aap"}
+\item staart van een lijst: \texttt{tail "aap"}
+\item lengte van een lijst: \texttt{length "aap"}
+\item omkeren van een lijst: \texttt{reverse "aap"}
+\end{itemize}
+
+\begin{verbatim}
+[3 ,4] ++ [1, 2]
+\end{verbatim}
+
+\begin{verbatim}
+[3,4,1,2]
+\end{verbatim}
+
+\begin{verbatim}
+4 : 5 : [9, 10]
+\end{verbatim}
+
+\begin{verbatim}
+[4,5,9,10]
+\end{verbatim}
+
+\begin{verbatim}
+"aap" ++ "noot" ++ "mies"
+\end{verbatim}
+
+\begin{verbatim}
+"aapnootmies"
+\end{verbatim}
+
+\begin{verbatim}
+head "aap"
+\end{verbatim}
+
+\begin{verbatim}
+'a'
+\end{verbatim}
+
+\begin{verbatim}
+tail "aap"
+\end{verbatim}
+
+\begin{verbatim}
+"ap"
+\end{verbatim}
+
+\begin{verbatim}
+length "aap"
+\end{verbatim}
+
+\begin{verbatim}
+3
+\end{verbatim}
+
+\begin{verbatim}
+reverse "aap"
+\end{verbatim}
+
+\begin{verbatim}
+"paa"
+\end{verbatim}
+
+\textbf{Tupels}
+
+Soms heb je twee of drie (of meer) waarden die bij elkaar horen, en eigenlijk één waarde vormen. Denk bijvoorbeeld aan de coördinaten in een 2-dimensionale ruimte. Hiervoor kun je een \textit{tupel} gebruiken, in dit geval een paar of 2-tupel. Het aantal waarden ligt vast, en is klein, maar de waarden hoeven niet van eenzelfde type te zijn.
+
+Een tupel schrijf je door de waarden tussen haakjes te schrijven, gescheiden door komma's. Voorbeelden:
+
+\begin{itemize}
+\item \texttt{(10, 20)} -- heeft type \texttt{(Int, Int)}
+\item \texttt{('a', 75)} -- heeft type \texttt{(Char, Int)}
+\item \texttt{(1.0, 4, 3.4)}-- heeft type \texttt{(Float, Int, Float)}
+\end{itemize}
+
+Een waarde in een tupel kan ook een samengestelde waarde zijn. Je kunt op die manier tupels en strings combineren, bijvoorbeeld:
+
+\begin{itemize}
+\item een tupel met lijsten \texttt{([1, 7] , "aap")} -- heeft type \texttt{([Int], [Char])}
+\item een lijst met tupels: \texttt{[('a', 7), ('b', 35)]}-- heeft type \texttt{[(Char, Int)]}
+\end{itemize}
+
+We hebben gezien dat je met de \texttt{( , , )} - notatie een tupel \textit{construeert} uit samenstellende waarden. Je kunt op de volgende manieren een tupel \textit{de-construeren} tot de samenstellende waarden:
+
+\begin{itemize}
+\item via het benoemen van de elementen:
+
+\begin{itemize}
+\item \texttt{let (a, b) = ('x', 37) in b * 2}
+\end{itemize}
+
+
+\item via de functies \texttt{fst}, \texttt{snd} (alleen voor 2-tupels ofwel \textit{paren})
+
+\begin{itemize}
+\item \texttt{let b = snd ('x', 37) in b * 2}
+\end{itemize}
+\end{itemize}
+
+\subsection{Typering van functies}
+
+Het type van een functie beschrijft de types van de parameter(s) en van het resultaat.
+Door het type bij een functie te vermelden verduidelijk je (voor een deel) hoe die functie gebruikt kan worden, en voorkom je sommige fouten in het gebruik van de functie.
+
+De notatie: \texttt{double :: Int -\textgreater  Int} geeft aan:
+
+\begin{itemize}
+\item dat \texttt{double} functie is (door de pijl: \texttt{-\textgreater })
+\item met een \texttt{Int}-waarde als parameter (het type voor de pijl)
+\item en een \texttt{Int}-waarde als resultaat (het type na de pijl)
+\end{itemize}
+
+Anders gezegd: \texttt{double} is een functie \textit{van} \texttt{Int} (domein) \textit{naar} \texttt{Int} (bereik).
+
+\begin{verbatim}
+double :: Int -> Int
+double x = x + x
+\end{verbatim}
+
+\begin{verbatim}
+double 8
+\end{verbatim}
+
+\begin{verbatim}
+16
+\end{verbatim}
+
+Toepassing van de functie \texttt{double} op een niet-\texttt{Int} argument geeft een foutmelding:
+
+\begin{verbatim}
+double 'A'
+\end{verbatim}
+
+\begin{verbatim}
+Runtime error: error: "<repl>": line 12, col 10: Cannot satisfy constraint: (Char ~ Int)
+     fully qualified: (Primitives.~ Primitives.Char Primitives.Int)
+\end{verbatim}

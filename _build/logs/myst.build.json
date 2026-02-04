@@ -1,0 +1,73 @@
+{
+  "input": {
+    "files": [
+      "article.md"
+    ],
+    "opts": {
+      "execute": false,
+      "pdf": true,
+      "tex": false,
+      "typst": false,
+      "docx": false,
+      "md": false,
+      "xml": false,
+      "meca": false,
+      "cff": false,
+      "site": false,
+      "html": false,
+      "all": false,
+      "doiBib": false,
+      "watch": false,
+      "force": false,
+      "checkLinks": false,
+      "strict": false,
+      "ci": false,
+      "maxSizeWebp": 1572864,
+      "keepHost": false
+    }
+  },
+  "exports": [
+    {
+      "format": "pdf",
+      "template": "plain_latex_book",
+      "output": "/Users/eelco/stack/books/fpbook2/exports/fpbook2.pdf",
+      "articles": [
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/root.md"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/inleiding.md"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/overzicht.md"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/nb1.ipynb"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/nb2.ipynb"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/nb3.ipynb"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/nb4.ipynb"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/nb5.ipynb"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/nb8.ipynb"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/voor-de-docent.md"
+        },
+        {
+          "file": "/Users/eelco/stack/books/fpbook2/over-deze-module.md"
+        }
+      ],
+      "$file": "/Users/eelco/stack/books/fpbook2/article.md",
+      "$project": "/Users/eelco/stack/books/fpbook2"
+    }
+  ]
+}

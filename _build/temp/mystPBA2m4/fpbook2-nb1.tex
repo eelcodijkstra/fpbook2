@@ -1,0 +1,302 @@
+\section{Waarden en functies}
+
+(Inleiding)
+
+\subsection{Waarden, namen en expressies}
+
+\begin{framed}
+\textbf{Begrippen}\\
+waarde, operator, expressie, prioriteit van operatoren (of ``sterkte van binding''), naam (-definitie, -gebruik), lokale namen (let-constructie).
+\end{framed}
+
+Als eerste stap in de kennismaking met functioneel programmeren beginnen we erg eenvoudig: met \textit{waarden}, zoals gehele getallen, en \textit{expressies} waarin je (invoer)waarden gebruikt om nieuwe (uitvoer)waarden te berekenen.
+
+Een \textbf{enkelvoudige waarde} is een \textit{getal}, een \textit{teken} (\textit{character}), of een logische waarde (\texttt{False} of \texttt{True}).
+
+Voorlopig gebruiken we alleen \textit{gehele getallen}.
+Later zullen we kennismaken met tekens, logische waarden, floating point getallen, en \textit{samengestelde waarden}, zoals strings en lijsten.
+
+In een \textbf{expressie} kunnen we waarden combineren met \textit{operatoren} en \textit{functies}, om daarmee nieuwe waarden uit te rekenen. De gebruikelijke operatoren zijn: \texttt{+ - *} voor optellen, aftrekken en vermenigvuldigen. Voor het delen van gehele getallen hebben we de functies \texttt{div} en \texttt{mod}. Vermenigvuldigen en delen hebben een grotere prioriteit dan optellen en aftrekken, alweer zoals we gewend zijn. We kunnen haakjes gebruiken om de prioriteit (volgorde van berekenen) expliciet aan te geven.
+
+\textit{Opmerking.} Operatoren blijken in Haskell ook gewoon functies te zijn; daar komen we later op terug.
+
+Voorbeelden van expressies
+
+\begin{verbatim}
+3 + 4 * 5
+\end{verbatim}
+
+\begin{verbatim}
+23
+\end{verbatim}
+
+\begin{verbatim}
+(3 + 4) * 5
+\end{verbatim}
+
+\begin{verbatim}
+35
+\end{verbatim}
+
+\textbf{Opdracht.} Geef voor bovenstaande expressies aan wat de waarden zijn en wat de operatoren.
+
+\subsection{Namen: definitie en gebruik}
+
+We kunnen een waarde een \textbf{naam} geven (\textit{definiëren}), en die naam later \textit{gebruiken} waar we de waarde nodig hebben. Bij het uitrekenen van een expressie vervangen we een naam dan door de waarde die aan die naam gekoppeld is.
+
+In een functionele taal als Haskell mag een naam precies één keer gedefinieerd zijn: je kunt in eenzelfde programma die naam geen andere waarde geven. \texttt{a} is dus geen variabele in de zin van ``gewone'' programmeertalen, het is meer zoals een naam in de wiskunde die een enkele waarde voorstelt.
+
+\textbf{let op:} namen van waarden en van functies moeten in Haskell met een kleine letter beginnen.
+
+\begin{verbatim}
+a = 3   - - definitie van a
+\end{verbatim}
+
+\begin{verbatim}
+a + 4 * 5  - - gebruik van a
+\end{verbatim}
+
+\begin{verbatim}
+23
+\end{verbatim}
+
+\begin{verbatim}
+b = 4 * 5 - - definitie van b
+\end{verbatim}
+
+\begin{verbatim}
+a + b  - - gebruik van a en b
+\end{verbatim}
+
+\begin{verbatim}
+23
+\end{verbatim}
+
+\textbf{Opmerking.} Wanneer reken je de expressie in de definitie van \texttt{b} uit? In onze voorbeelden gaan we ervan uit dat je eerst de expressie uitrekent, en de resultaat-waarde gebruikt als definitie van \texttt{b}. Maar: in Haskell maakt dat niet uit, omdat je een naam maar éénmaal een waarde mag geven: je zou de berekening ook later kunnen uitvoeren (\textit{lazy evaluation}).
+
+Een expressie beschrijft een berekening. Deze berekening kun je met de hand uitvoeren, waarbij je elke stap uitlegt wat je doet.
+
+Voorbeeld:
+
+\begin{verbatim}
+2 * a + b
+==     {vervang a door de bijbehorende waarde: 3}
+    2 * 3 + b
+==     {rekenen}
+    6 + b
+==     {vervang b door 20}
+    6 + 20
+==     {rekenen}
+    26
+\end{verbatim}
+
+Dit blijkt te kloppen met het Haskell-resultaat
+
+\begin{verbatim}
+2 * a + b
+\end{verbatim}
+
+\begin{verbatim}
+26
+\end{verbatim}
+
+Bovenstaande uitwerking lijkt erg omslachtig, maar we zullen later voorbeelden zien waarin zulke berekeningen kunnen helpen om programma's te begrijpen.
+
+\subsubsection{Lokale namen: let}
+
+De namen \texttt{a} en \texttt{b} die we hierboven gedefinieerd hebben, hebben betekenis voor het hele programma. Het zijn *globale namen. Met de \texttt{let}-constructie kun je een lokale naam definiëren: deze heeft alleen betekenis in de let-expressie:
+
+\texttt{let \textless naam\textgreater  = \textless waarde\textgreater  in \textless expressie met naam\textgreater }
+
+Voorbeeld:
+
+\begin{verbatim}
+let x = 20 in x + 3
+\end{verbatim}
+
+\begin{verbatim}
+23
+\end{verbatim}
+
+Deze lokale naam \texttt{x} heeft buiten de let-constructie geen betekenis:
+
+\begin{verbatim}
+x
+\end{verbatim}
+
+\begin{verbatim}
+Runtime error: error: "<repl>": line 10, col 3: undefined value: x
+\end{verbatim}
+
+Omdat de lokale naam buiten de let-constructie geen betekenis heeft, hadden we ook een andere naam kunnen gebruiken:
+
+\begin{verbatim}
+let zzz = 20 in zzz + 3
+\end{verbatim}
+
+\begin{verbatim}
+23
+\end{verbatim}
+
+\subsection{Functies: definitie en toepassing}
+
+\begin{framed}
+\textbf{Begrippen}\\
+\begin{itemize}
+\item functie-definitie
+\item functie-naam
+\item functie-parameter - als lokale naam
+\item functie-expressie (``body''), met daarin de parameter
+\item toepassing van een functie op een (argument)waarde
+\end{itemize}
+\end{framed}
+
+In de voorbeelden hierboven staan de namen \texttt{a} en \texttt{b} voor getallen.
+Maar, we kunnen een naam ook koppelen aan een \textit{functie}.
+
+\begin{itemize}
+\item de definitie van een functie koppelt de functie-naam aan een functie-waarde (expressie)
+\end{itemize}
+
+\textbf{functie-definitie.} Als eerste voorbeeld van een functie definiëren we de functie \texttt{sqr}, voor het kwadrateren van een getal. De gebruikerlijke wiskundige hiervan definitie is:
+
+\begin{equation}
+f(x) = x * x
+\end{equation}
+
+In Haskell wordt dit:
+
+\begin{verbatim}
+sqr x = x * x
+\end{verbatim}
+
+Deze regel definieert de naam \texttt{sqr} als de naam van de functie, met één \textit{parameter}, die we hier \texttt{x} noemen. De definitie koppelt de naam \texttt{sqr} aan de geparametriseerde expressie, \texttt{x * x}.
+
+De \textit{naam} van de parameter \texttt{x} heeft alleen betekenis in de functie-definitie. We kunnen deze definitie ook schrijven als: \texttt{sqr y = y * y} of als \texttt{sqr abc = abc * abc}.
+
+Merk op dat we hier geen haakjes gebruiken, in tegenstelling tot de wiskundige defintie.
+
+\textbf{functie-toepassing.} We kunnen een functie \textit{toepassen op een waarde.}
+
+De functie \texttt{sqr} toegepast op de waarde \texttt{3} schrijven we in Haskell als: \texttt{sqr 3}
+
+De waarde waarop de functie toegepast wordt heet ook wel de argument-waarde.
+
+Voor functie-toepassing (Engels: \textit{function application}) gebruik je in Haskell geen haakjes, net als in de definitie. In veel andere programmeertalen schrijf je: \texttt{sqr(3)} - net is meestal in de wiskunde.
+
+Functie-toepassing in Haskell bindt sterker dan de operatoren: \texttt{sqr 3 + 4} lees je dan als \texttt{(sqr 3) + 4}. (Ga dit na.) Dit is dus iets anders dan \texttt{sqr (3 + 4)}.
+
+De toepassing van deze functie op een argument, bijvoorbeeld \texttt{sqr 7}, resulteert in de expressie (berekening) waarin de waarde van het afgument ingevuld is in de definiërende expressie van de functie, hier \texttt{sqr}:
+
+\begin{verbatim}
+sqr 7
+==    {functie -toepassing sqr: vervang de naam door de definiërende expressie}
+    let x = 7 in x * x
+==    {vervang x door waarde: 7}
+    7 * 7
+==    {rekenen}
+    49
+\end{verbatim}
+
+\begin{verbatim}
+sqr 7
+\end{verbatim}
+
+\begin{verbatim}
+49
+\end{verbatim}
+
+\textbf{Voorbeeld.} In het onderstaande voorbeeld gebruiken we een \textit{expressie} als argument voor de sqr-functie. In dit geval moeten we haakjes gebruiken voor deze expressie, omdat functie-applicatie sterker ``bindt'' dan optelling (of andere operatoren). De notatie \texttt{sqr a + 2} moet je dan lezen als \texttt{(sqr a) + 2}. \textit{Ga dit na.}
+
+\begin{verbatim}
+sqr a - 10
+\end{verbatim}
+
+\begin{verbatim}
+-1
+\end{verbatim}
+
+Als je een andere volgorde (prioriteit) wilt afdwingen gebruik je haakjes:
+
+\begin{verbatim}
+sqr (a - 10)
+\end{verbatim}
+
+\begin{verbatim}
+49
+\end{verbatim}
+
+Mogelijke voorbeelden:
+
+\begin{itemize}
+\item double
+\item succ
+\item isEven
+\item (omzetten van hoofd- in kleine letters of omgekeerd)
+\end{itemize}
+
+\begin{verbatim}
+sqr (a + 2)
+\end{verbatim}
+
+\begin{verbatim}
+25
+\end{verbatim}
+
+We rekenen deze expressie uit door \textit{eerst de argument-expressie \texttt{a + 2} uit te rekenen}:
+
+\begin{verbatim}
+sqr (a + 2)
+==     {invullen waarde van a}
+    sqr (3 + 2)
+==     {rekenen}
+    sqr 5
+==     {invullen definitie van sqr}
+    let x = 5 in x * x
+==     {invullen waarde van x}
+    5 * 5
+==     {rekenen}
+    25
+\end{verbatim}
+
+We kunnen de volgorde van de verschillende stappen ook anders kiezen, bijvoorbeeld:
+
+\begin{verbatim}
+sqr (a + 2)
+==     {invullen definitie van sqr}
+    let x = a + 2 in x * x
+==     {invullen van waarde van x}
+    (a + 2) * (a + 2)
+==     {invullen van waarde van a}
+    (3 + 2) * ( 3 + 2)
+==     {rekenen}
+    5 * 5
+==     {rekenen}
+    25
+\end{verbatim}
+
+Merk op dat we hetzelde resultaat krijgen als eerder. In een functionele taal maakt de volgorde van de stappen geen verschil voor het resultaat, omdat de waarde bij een naam nooit verandert. Maar deze volgorde kan wel verschil maken voor de \textit{hoeveelheid rekenwerk}. In dit laatste voorbeeld moesten we bijvoorbeeld de uitdrukking \texttt{3 + 2} tweemaal uitrekenen.
+
+In het vervolg hanteren we steeds de regel: eerst de argumenten uitreken, daarna de functie-definitie invullen. Deze manier van het gebruik van functies heet \textit{strict evaluation}. Dit is de aanpak die de meeste programmeertalen gebruiken, ook veel functionele talen.
+
+Haskell zelf gebruikt een andere aanpak: een expressie wordt pas uitgerekend als het resultaat nodig is, bijvoorbeeld omdat dit afgedrukt moet worden. Deze aanpak heet \textit{lazy evaluation}. We zullen daar later voorbeelden van laten zien, en gevallen waar dit extra gemak geeft.
+
+\subsubsection{Functies met meerdere parameters}
+
+Een voorbeeld van een functie met meerdere parameters:
+
+\begin{verbatim}
+add x y = x + y
+\end{verbatim}
+
+Deze functie pas je toe door twee argument-waarden na de functienaam te plaatsen:
+
+\begin{verbatim}
+add 3 (4*5)
+\end{verbatim}
+
+\begin{verbatim}
+23
+\end{verbatim}
+
+Merk op: geen haakjes, geen komma. Maar wel haakjes voor de expressie \texttt{4*5}, omdat \textit{functie-applicatie sterker bindt dan vermenigvuldigen}. Zonder deze haakjes zou de betekenis zijn: \texttt{(add 3 4) * 5} (\textit{ga dit na})

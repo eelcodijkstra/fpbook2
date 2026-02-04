@@ -1,0 +1,41 @@
+\contentsline {section}{\numberline {0.1}Module Functioneel Programmeren}{1}{section.0.1}%
+\contentsline {section}{\numberline {0.2}Inleiding}{2}{section.0.2}%
+\contentsline {section}{\numberline {0.3}Overzicht}{3}{section.0.3}%
+\contentsline {subsection}{\numberline {0.3.1}Waarden, expressies en namen}{3}{subsection.0.3.1}%
+\contentsline {subsection}{\numberline {0.3.2}Functies}{3}{subsection.0.3.2}%
+\contentsline {subsection}{\numberline {0.3.3}Types en waarden}{4}{subsection.0.3.3}%
+\contentsline {subsubsection}{Elementaire types}{4}{section*.2}%
+\contentsline {subsubsection}{Samengestelde types}{4}{section*.3}%
+\contentsline {subsubsection}{Typering van functies}{4}{section*.4}%
+\contentsline {subsection}{\numberline {0.3.4}Functies als waarden}{4}{subsection.0.3.4}%
+\contentsline {subsection}{\numberline {0.3.5}Zelf-gedefinieerde data-types}{4}{subsection.0.3.5}%
+\contentsline {subsection}{\numberline {0.3.6}Recursie: data-types en functies}{4}{subsection.0.3.6}%
+\contentsline {subsection}{\numberline {0.3.7}Generieke functies (map enz.)}{5}{subsection.0.3.7}%
+\contentsline {section}{\numberline {0.4}Waarden en functies}{6}{section.0.4}%
+\contentsline {subsection}{\numberline {0.4.1}Waarden, namen en expressies}{6}{subsection.0.4.1}%
+\contentsline {subsection}{\numberline {0.4.2}Namen: definitie en gebruik}{6}{subsection.0.4.2}%
+\contentsline {subsubsection}{Lokale namen: let}{7}{section*.5}%
+\contentsline {subsection}{\numberline {0.4.3}Functies: definitie en toepassing}{7}{subsection.0.4.3}%
+\contentsline {subsubsection}{Functies met meerdere parameters}{10}{section*.6}%
+\contentsline {section}{\numberline {0.5}Een voorproefje van functioneel programmeren in Haskell}{11}{section.0.5}%
+\contentsline {section}{\numberline {0.6}Typering en lijsten}{12}{section.0.6}%
+\contentsline {subsection}{\numberline {0.6.1}Typering van functies}{14}{subsection.0.6.1}%
+\contentsline {section}{\numberline {0.7}Functies als waarden}{15}{section.0.7}%
+\contentsline {subsection}{\numberline {0.7.1}Lambda-expressies: anonieme functie-waarden}{15}{subsection.0.7.1}%
+\contentsline {subsection}{\numberline {0.7.2}Functie als operator, operator als functie}{16}{subsection.0.7.2}%
+\contentsline {subsection}{\numberline {0.7.3}Functie als parameter: map, reduce, filter}{16}{subsection.0.7.3}%
+\contentsline {subsection}{\numberline {0.7.4}Functie als resultaat}{18}{subsection.0.7.4}%
+\contentsline {subsection}{\numberline {0.7.5}Functies in datastructuren}{19}{subsection.0.7.5}%
+\contentsline {section}{\numberline {0.8}Zelf-gedefinieerde datatypes}{20}{section.0.8}%
+\contentsline {subsection}{\numberline {0.8.1}Alternatieve waarden}{20}{subsection.0.8.1}%
+\contentsline {subsubsection}{Voorbeeld: kleuren}{20}{section*.7}%
+\contentsline {subsubsection}{Bool als data-type}{21}{section*.8}%
+\contentsline {subsection}{\numberline {0.8.2}Alternatieven met attributen}{21}{subsection.0.8.2}%
+\contentsline {subsubsection}{Voorbeeld: vormen}{21}{section*.9}%
+\contentsline {subsubsection}{Voorbeeld: expressies}{23}{section*.10}%
+\contentsline {section}{\numberline {0.9}Recursieve datatypes}{25}{section.0.9}%
+\contentsline {subsection}{\numberline {0.9.1}Voorbeeld: expressies}{25}{subsection.0.9.1}%
+\contentsline {subsection}{\numberline {0.9.2}Voorbeeld: vormen}{26}{subsection.0.9.2}%
+\contentsline {section}{\numberline {0.10}Voor de docent}{28}{section.0.10}%
+\contentsline {subsection}{\numberline {0.10.1}Tips voor het gebruik van Jupyter Notebook}{28}{subsection.0.10.1}%
+\contentsline {section}{\numberline {0.11}Over deze module}{29}{section.0.11}%

@@ -1,0 +1,191 @@
+\section{Recursieve datatypes}
+
+\subsection{Voorbeeld: expressies}
+
+We hebben in het vorige hoofdstuk gezien dat we voor algemene expressies recursie nodig hebben: een argument van een operator-knoop kan weer een expressie zijn.
+
+Dit kunnen we weergeven in de volgende definitie: (later voegen we meer operatoren toe)
+
+\begin{verbatim}
+data Expr = Add Expr Expr
+          | Mul Expr Expr
+          | Val Float
+\end{verbatim}
+
+Merk op:
+
+\begin{itemize}
+\item in de definitie van \texttt{Expr} komt \texttt{Expr} weer voor in de definiërende termen in de rechterkant: dit is \textit{recursie}. (Letterlijk: komt weer voor)
+\item het alternatief \texttt{Val Float} is niet recursief. In een recursieve (data)definitie moet tenminste één alternatief niet-recursief zijn.
+\end{itemize}
+
+Met behulp van deze definitie kunnen we nu waarden construeren:
+
+\begin{verbatim}
+expr1 = Add (Val 1) (Val 2.5)
+\end{verbatim}
+
+\begin{verbatim}
+expr2 = Add (Mul (Val 2) (Val 7.5)) (Val 3)
+\end{verbatim}
+
+We kunnen nu functies definiëren op \texttt{Expr}-waarden. Een dergelijke functie moet een alternatieve definitie hebben voor elk alternatief in de data-definitie. Anders gezegd: een functie die werkt op \texttt{Expr}-waarden volgt de structuur van het \texttt{Expr} data-type.
+
+Als voorbeeld geven we een functie om een \texttt{Expr}-waarde uit te rekenen. Merk op dat we haakjes om de parameters van \texttt{eval} moeten schrijven, omdat \texttt{eval Add a b} gelezen wordt als \texttt{(eval Add) a b}
+
+\begin{verbatim}
+eval :: Expr -> Float
+eval (Add a b) = (eval a) + (eval b)
+eval (Mul a b) = (eval a) * (eval b)
+eval (Val a) = a
+\end{verbatim}
+
+\begin{verbatim}
+eval expr1
+\end{verbatim}
+
+\begin{verbatim}
+3.5
+\end{verbatim}
+
+\begin{verbatim}
+eval expr2
+\end{verbatim}
+
+\begin{verbatim}
+18.0
+\end{verbatim}
+
+We schrijven hier de uitwerking van deze laatste uitdrukking uit:
+
+\begin{verbatim}
+eval expr2
+=   {def. expr2}
+  eval (Add (Mul (Val 2) (Val 7.5)) (Val 3)
+=   {def. eval, voor Mul -alternatief}
+  (eval (Mul (Val 2) (Val 7.5)) + (eval (Val 3))
+=   {def. eval, voor Add -alternatief}
+  ((eval (Val 2)) * (eval (Val 7.5))) + (eval (Val 3))
+=   {def. eval, voor alle Val -alternatieven}
+  ((2) * (7.5)) + (3)
+=   {rekenen}
+  (15.0) + (3)
+=   {rekenen}
+  18.0
+\end{verbatim}
+
+\textbf{Voorbeeld.} Met behulp van de functie \texttt{postfix} zetten we een \texttt{Expr}-waarde om in een string, in \textit{postfix-formaat}: eerst de argumenten, dan de operator.
+
+\begin{verbatim}
+postfix :: Expr -> String
+postfix (Add a b) = (postfix a) ++ (postfix b) ++ " + "
+postfix (Mul a b) = (postfix a) ++ (postfix b) ++ " * "
+postfix (Val a) = show a ++ " "
+\end{verbatim}
+
+\begin{verbatim}
+postfix expr2
+\end{verbatim}
+
+\begin{verbatim}
+"2.0 7.5  * 3.0  + "
+\end{verbatim}
+
+\textbf{Opdracht} Maak een functie om een \texttt{Expr}-waarde om te zetten in prefix-formaat: eerst de operator, dan de argumenten.
+
+Variant: probeer de string in Haskell-formaat te maken, waarbij je de operatoren als functies beschouwt. (Gebruik de Haskell-notatie: \texttt{(+) 3 4} - met de operatoren tussen haakjes).
+
+\subsection{Voorbeeld: vormen}
+
+We voegen aan de grafische figuren \textit{groepering} toe, waarbij we een lijst van grafische elementen samenvoegen tot één element. Bovendien voegen we \textit{tranformaties} toe aan deze groepen.
+
+Groepering is in tekenprogramma's een gebruikelijke operatie. De elementen in een groep kun je dan tegelijk verplaatsen, en bijvoorbeeld ook tegelijk kopiëren. Als je de afzonderlijke elementen wilt bewerken, kun je deze groepering (tijdelijk) opheffen.
+
+In SVG kun je in een groep ook de vormgeving van de elementen in de groep bepalen, zoals de vulkeur of de pendikte.
+
+(Wij voegen hier een positie toe aan een groep: dat komt overeen met een \textit{translate} van de elementen in de groep.)
+
+\begin{verbatim}
+type Point = (Float, Float)
+\end{verbatim}
+
+\begin{verbatim}
+data Shape = Circle Point Float
+           | Rect Point Float Float
+           | Text Point String
+           | Line Point Point
+           | Grp Point [Shape]
+             deriving (Show)
+\end{verbatim}
+
+\begin{verbatim}
+shape1 = Circle (10, 10) 20
+shape2 = Rect (20, 10) 100 20
+\end{verbatim}
+
+\begin{verbatim}
+shape3 = Line (10, 10) (100, 100)
+\end{verbatim}
+
+\begin{verbatim}
+attr :: String -> Float -> String
+attr name value = name ++ "=\"" ++ (show value) ++ "\" "
+\end{verbatim}
+
+\begin{verbatim}
+tosvg :: Shape -> String
+tosvg (Circle (mx, my) r) = "<circle " ++ (attr "cx" mx) ++ (attr "cy" my) ++ (attr "r" r) ++ " /> \n"
+tosvg (Rect (mx, my) w h) = "<rect " ++ (attr "x" mx) ++ (attr "y" my) ++ (attr "width" w) ++ (attr "height" h) ++ "/> \n"
+tosvg (Text (mx, my) s) = "<text x=" ++ (attr "x" mx) ++ (attr "y" my) ++ ">" ++ s ++ "</text> \n"
+tosvg (Line (ax, ay) (bx, by)) = "<line " ++ (attr "x1" ax) ++ (attr "y1" ay) ++ (attr "x2" bx) ++ (attr "y2" by) ++ "/> \n"
+tosvg (Grp (mx, my) lst) = "<g transform=\"translate(" ++ (show mx) ++ " " ++ (show my) ++ ")\" > \n" ++ elems ++ "</g>\n"
+                           where svg_lst = map tosvg lst
+                                 elems = foldr (++) "" svg_lst
+\end{verbatim}
+
+\begin{verbatim}
+putStr (tosvg shape1)
+\end{verbatim}
+
+\begin{verbatim}
+<circle cx="10.0" cy="10.0" r="20.0"  />
+\end{verbatim}
+
+\begin{verbatim}
+shape4 = Grp (10, 20) [shape1, Grp (50, 50) [shape1, shape2, shape3], shape2]
+\end{verbatim}
+
+\begin{verbatim}
+shape4
+\end{verbatim}
+
+\begin{verbatim}
+Grp (10.0,20.0) [Circle (10.0,10.0) 20.0,Grp (50.0,50.0) [Circle (10.0,10.0) 20.0,Rect (20.0,10.0) 100.0 20.0,Line (10.0,10.0) (100.0,100.0)],Rect (20.0,10.0) 100.0 20.0]
+\end{verbatim}
+
+\begin{verbatim}
+putStr (tosvg shape4)
+\end{verbatim}
+
+\begin{verbatim}
+<g transform="translate(10.0 20.0)" > 
+<circle cx="10.0" cy="10.0" r="20.0"  /> 
+<g transform="translate(50.0 50.0)" > 
+<circle cx="10.0" cy="10.0" r="20.0"  /> 
+<rect x="20.0" y="10.0" width="100.0" height="20.0" /> 
+<line x1="10.0" y1="10.0" x2="100.0" y2="100.0" /> 
+</g>
+<rect x="20.0" y="10.0" width="100.0" height="20.0" /> 
+</g>
+\end{verbatim}
+
+Dit geeft de volgende figuur:
+
+\includegraphics[width=0.7\linewidth]{files/svg-fig3-2ee8f8da8610aeac78c3dd16e86b1c5e.png}
+
+\textbf{Opdracht}
+
+\begin{itemize}
+\item maak een figuur die een huisje of een poppetje voorstelt (en geef deze een naam)
+\item maak een figuur die bovenstaande 3-maal naast elkaar herhaalt.
+\end{itemize}

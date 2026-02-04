@@ -1,0 +1,22 @@
+\contentsline {section}{\numberline {0.1}Module Functioneel Programmeren}{1}{section.0.1}%
+\contentsline {section}{\numberline {0.2}Inleiding}{2}{section.0.2}%
+\contentsline {section}{\numberline {0.3}Overzicht}{3}{section.0.3}%
+\contentsline {subsection}{\numberline {0.3.1}Eerste kennismaking}{3}{subsection.0.3.1}%
+\contentsline {subsection}{\numberline {0.3.2}Waarden, expressies en namen}{3}{subsection.0.3.2}%
+\contentsline {subsection}{\numberline {0.3.3}Functies}{3}{subsection.0.3.3}%
+\contentsline {subsection}{\numberline {0.3.4}Types en waarden}{3}{subsection.0.3.4}%
+\contentsline {subsubsection}{Elementaire types}{3}{section*.2}%
+\contentsline {subsubsection}{Samengestelde types}{3}{section*.3}%
+\contentsline {subsubsection}{Typering van functies}{3}{section*.4}%
+\contentsline {subsection}{\numberline {0.3.5}Functies als waarden}{4}{subsection.0.3.5}%
+\contentsline {subsection}{\numberline {0.3.6}Zelf-gedefinieerde data-types}{4}{subsection.0.3.6}%
+\contentsline {subsection}{\numberline {0.3.7}Recursie: data-types en functies}{4}{subsection.0.3.7}%
+\contentsline {subsection}{\numberline {0.3.8}Generieke functies (map enz.)}{4}{subsection.0.3.8}%
+\contentsline {section}{\numberline {0.4}Voor de docent}{5}{section.0.4}%
+\contentsline {subsection}{\numberline {0.4.1}Tips voor het gebruik van Jupyter Notebook}{5}{subsection.0.4.1}%
+\contentsline {section}{\numberline {0.5}Over deze module}{6}{section.0.5}%
+\contentsline {section}{\numberline {0.6}Waarden en functies}{7}{section.0.6}%
+\contentsline {subsection}{\numberline {0.6.1}Waarden, namen en expressies}{7}{subsection.0.6.1}%
+\contentsline {subsection}{\numberline {0.6.2}Namen: definitie en gebruik}{7}{subsection.0.6.2}%
+\contentsline {subsection}{\numberline {0.6.3}Functies: definitie en gebruik}{8}{subsection.0.6.3}%
+\contentsline {subsubsection}{Functies met meerdere parameters}{11}{section*.5}%

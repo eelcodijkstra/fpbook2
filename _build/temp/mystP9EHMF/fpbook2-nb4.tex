@@ -1,0 +1,348 @@
+\section{Functies als waarden}
+
+In dit hoofdstuk maak je kennis met functies als waarden. Een functie kan overal gebruikt worden waar je een ``normale'' waarde zoals een getal of een string kunt gebruiken:
+
+\begin{itemize}
+\item een functie kan optreden als \textit{parameter} van een andere functie;
+\item een functie kan optreden als \textit{resultaat} van een functie;
+\item een functie kan onderdeel zijn van een samengestelde datastructuur, zoals een lijst;
+\item je kunt ``rekenen met functies'', bijvoorbeeld door de \textit{compositie van twee functies}.
+\end{itemize}
+
+Je kunt ook anonieme functie-waarden kunt hebben: een functie-waarde hoeft niet beslist een naam te hebben, net zomin als elke getalwaarde of string een naam hoeft te hebben.
+
+\subsection{Lambda-expressies: anonieme functie-waarden}
+
+Tot nu toe hebben we functie-definities gezien van de vorm: \texttt{sqr x = x * x}. Dit lijkt nog niet op de vorm van andere naam-waarde koppelingen, zoals \texttt{a = 42}. De waarde \texttt{42} is hier een anonieme waarde, die in deze definitie gekoppeld wordt aan een naam.
+
+Een lambda-expressie beschrijft een \textit{anonieme functie}: deze bestaat alleen uit de parameters en de definiërende expressie. Bijvoorbeeld:
+
+\begin{verbatim}
+\ x -> x * x
+\end{verbatim}
+
+Het symbool \texttt{{\textbackslash}} spreek je uit als \textit{lambda}, zie ook de gelijkenis met de griekse letter $\lambda$. Het pijltje \texttt{-\textgreater } kun je uitspreken als \texttt{naar} of \texttt{geeft}. Merk de overeenkomst op tussen deze lambda-expressie en de notatie voor een functie-type.
+
+Wat kun je met zo'n anonieme functie-expressie (of eigenlijk: functie-waarde)? Deze kun je gebruiken overal waar je een functie-waarde verwacht: in functie-definities, parameters of resultaten, enz.
+
+Hiermee kunnen we de definitie van een functie schrijven op dezelfde manier als een ``normale'' naam-waarde definitie:
+
+\begin{verbatim}
+sqr :: Int -> Int
+sqr = \ x -> x * x
+\end{verbatim}
+
+De toepassing van een functie op een argument kun zien als het vervangen van de \texttt{{\textbackslash}} door \texttt{let}, met de parameter-naam gekoppeld aan het argument; en het pijltje \texttt{-\textgreater } vervangen door \texttt{in}
+
+\begin{verbatim}
+sqr 7
+==    {invullen waarde van sqr}
+    (\ x -> x * x) 7
+==    {functie -toepassing op argument 7)
+    let x = 7 in x * x
+==    {invullen waarde van  x}
+    7 * 7
+==    {rekenen}
+    49
+\end{verbatim}
+
+\begin{verbatim}
+sqr :: Int -> Int
+sqr = \ x -> x * x
+\end{verbatim}
+
+\begin{verbatim}
+sqr 7
+\end{verbatim}
+
+\begin{verbatim}
+49
+\end{verbatim}
+
+\begin{verbatim}
+(\ y -> y * y) 7
+\end{verbatim}
+
+\begin{verbatim}
+49
+\end{verbatim}
+
+\textbf{Opdracht} Definieer de functie \texttt{double} met een lambda-expressie.
+
+\textbf{functies en lambda-expressies met meerdere parameters}
+
+Een lambda-expressie kan ook meerdere parameters hebben:
+
+\begin{verbatim}
+add :: Int -> Int -> Int
+add = \ x y -> x + y
+\end{verbatim}
+
+\begin{verbatim}
+add :: Int -> Int -> Int
+add = \ x y -> x + y
+\end{verbatim}
+
+\begin{verbatim}
+add 3 4
+\end{verbatim}
+
+\begin{verbatim}
+7
+\end{verbatim}
+
+\subsection{Functie als operator, operator als functie}
+
+Een functie met twee parameters, zoals \texttt{add} hierboven, kun je ook als (binaire) operator \textit{tussen de parameters} noteren, zoals een \texttt{+} of \texttt{*} operator. Je gebruikt daarvoor ``backticks'' (```) rond de naam.
+
+\begin{verbatim}
+3 `add` 4 `add` 5
+\end{verbatim}
+
+Alleen de notatie verandert, het principe van functie-aanroep blijft gelijk.
+
+\begin{verbatim}
+3 `add` 4 `add` 5
+\end{verbatim}
+
+\begin{verbatim}
+12
+\end{verbatim}
+
+\textbf{Operatoren als functie.} Je kunt een operator, zoals \texttt{+} ook als functie gebruiken, door deze tussen haakjes te plaatsen: \texttt{(+)}. bijvoorbeeld: \texttt{(+) 3 4}
+
+\begin{verbatim}
+(+) 3 4
+\end{verbatim}
+
+Bij ingewikkelder expressies moet je er dan rekening mee houden dat functie-toepassing ``links-associatief'' is. In de onderstaande expressie is daarom een extra haakjes-paar nodig voor de vermenigvuldiging.
+
+\begin{verbatim}
+(+) 3 ((*) 4 5)
+\end{verbatim}
+
+\begin{verbatim}
+23
+\end{verbatim}
+
+\subsection{Functie als parameter: map, reduce, filter}
+
+Soms wil je een functie toepassen op alle waarden in een datastructuu, zoals een lijst.
+Hiervoor heb je in Haskell (en andere talen) de functie \texttt{map} die zowel een functie als een lijst als parameter heeft: deze \texttt{map} past de betreffende functie toe op alle elementen van de lijst:
+
+\texttt{map f [a, b, c, ...] = [f a, f b, fc, ...]}
+
+Het type van \texttt{map} voor \texttt{Int}-lijsten kun je dan zien als: \texttt{map :: (Int -\textgreater  Int) -\textgreater  [Int] -\textgreater  [Int]}
+De eerste parameter is een functie, de tweede is een Int-lijst, het resultaat is ook weer een Int-lijst.
+
+\begin{verbatim}
+sqr :: Int -> Int
+sqr x = x * x
+\end{verbatim}
+
+Voorbeeld
+
+\begin{verbatim}
+map sqr [1,3,7]
+==    {"definitie" map invullen}
+    [sqr 1, sqr 3, sqr 7]
+==    {definitie sqr invullen}
+    [let x=1 in x*x, let x=3 in x*x, let x=7 in x*x]
+==    {definitie (waarde) van x invullen}
+    [1*1, 3*3, 7*7]
+==    {rekenen}
+    [1, 9, 49]
+\end{verbatim}
+
+\begin{verbatim}
+map sqr [1, 3, 7]
+\end{verbatim}
+
+\begin{verbatim}
+[1,9,49]
+\end{verbatim}
+
+\begin{verbatim}
+double :: Int -> Int
+double x = x + x
+\end{verbatim}
+
+\begin{verbatim}
+map double [1..10]
+\end{verbatim}
+
+\begin{verbatim}
+[2,4,6,8,10,12,14,16,18,20]
+\end{verbatim}
+
+Je kunt ook een \textit{anonieme functie} (lambda expressie) meegeven aan \texttt{map}:
+
+\begin{verbatim}
+map (\x -> x * x * x) [1..10]
+\end{verbatim}
+
+\begin{verbatim}
+[1,8,27,64,125,216,343,512,729,1000]
+\end{verbatim}
+
+\textbf{foldl, foldr} Een andere veel voorkomende operatie is om een functie \textit{tussen} alle elementen van een lijst uit te voeren, bijvoorbeeld het optellen van alle elementen.
+
+\texttt{[1, 3, 7]} -\textgreater  \texttt{1 + 3 + 7} -\textgreater  \texttt{11}
+
+Als de lijst leeg is, is het resultaat 0 (voor optelling). Eigenlijk kun je bovenstaande dan schrijven als:
+
+\texttt{[1, 3, 7]} -\textgreater  \texttt{1 + 3 + 7 + 0} -\textgreater  \texttt{11}
+
+(Wat is de waarde die je moet gebruiken voor het vermenigvuldigen van alle elementen van een lijst? Anders gezegd: welke bijdrage levert de lege lijst aan de totale vermenigvuldiging?)
+
+De functie \texttt{foldl} (\textit{fold left}) in Haskell past een operator \texttt{f} (functie met 2 parameters) toe \textit{tussen} alle elementen van een lijst, waarbij het resultaat voor de lege lijst gelijk is aan de ``nul-waarde'' \texttt{z}:
+
+\begin{verbatim}
+foldl :: (Int -> Int) -> Int -> [Int] - Int
+foldl f z [a, b, c, ...] = a `f` b `f` c `f` ... `f` z
+\end{verbatim}
+
+Dit kun je ook zien als het vervangen van de const-constructor \texttt{:} door de functie (operator) \texttt{f}, waarbij de waarde voor de lege lijst gelijk is aan de ``nul-waarde'' \texttt{z}:
+
+\begin{verbatim}
+foldl f z (a : b : c ... : []) = a `f` b `f` c ... `f` z
+\end{verbatim}
+
+Voorbeeld:
+
+\begin{verbatim}
+foldl (+) 0 (1 : 3 : 7 : []) = 1 + 3 + 7 + 0 = 11
+\end{verbatim}
+
+De functie \texttt{foldl} vouwt de lijst wordt eigenlijk ``opgevouwen'' tot een enkele waarde met behulp van de functie \texttt{f}, vandaar de naam \texttt{foldl} (fold left).
+
+Naast \texttt{foldl} heb je ook \texttt{foldr} (\textit{fold right}). Het verschil is dat \texttt{foldl} van links naar rechts rekent (links-associatief), en foldr van rechts naar links (rechts-associatief). Voor het optellen van gehele getallen maakt dat geen verschil, maar bij andere functies kan dat een ander resultaat geven.
+
+\begin{verbatim}
+foldl f z (a : b : c ... : []) = ((((a `f` b) `f` c) ...) `f` z)
+foldr f z (a : b : c ... : []) = (a `f` (b `f` (c `f` (... `f` z))))
+\end{verbatim}
+
+\textbf{reduce} In andere programmeertalen heet de functie \texttt{foldl} vaak \textit{reduce}: deze reduceert een lijst, of een andere datastructuur, tot een enkele waarde.
+
+De combinatie \textbf{map/reduce} (en soms ook \textit{filter}) komt tegenwoordig in veel programmeertalen voor: dit maakt het mogelijk om potentieel parallellisme uit te drukken, omdat de volgorde van de afzonderlijke operaties er niet toe doet.
+
+\begin{verbatim}
+foldl (\x y -> x + y) 0 [1..10]
+\end{verbatim}
+
+\begin{verbatim}
+55
+\end{verbatim}
+
+\begin{verbatim}
+foldl (\x y -> x + y) 0 []
+\end{verbatim}
+
+\begin{verbatim}
+0
+\end{verbatim}
+
+\textbf{Operatoren als functie.} Je kunt een operator, zoals \texttt{+} ook als functie gebruiken, door deze tussen haakjes te plaatsen: \texttt{(+)}. Bovenstaand voorbeeld kun je dan ook schrijven als:
+
+\subsection{Functie als resultaat}
+
+Je kunt een functie-waarde ook gebruiken als resultaat van een functie.
+Bestudeer het volgende voorbeeld:
+
+\begin{verbatim}
+addx :: Int -> (Int -> Int)
+addx x = \ y -> x + y
+
+addtwo = addx 2
+...
+addtwo 9
+\end{verbatim}
+
+De functie-toepassing \texttt{addx 2} heeft als resultaat de functie-waarde \texttt{{\textbackslash}~y -\textgreater  2 + y}
+
+\begin{verbatim}
+addx 2
+\end{verbatim}
+
+==    \{definitie van addx invullen\}
+let x = 2 in {\textbackslash}~y -\textgreater  x + y
+==    \{definitie van x invullen\}
+{\textbackslash}~y -\textgreater  2 + y
+
+We kunnen de definitie van \texttt{addx} ook schrijven als geneste lambda-expressies:
+
+\begin{verbatim}
+addx :: Int -> (Int -> Int)
+addx = \ x -> (\ y -> x + y)
+\end{verbatim}
+
+De haakjes rond het resultaat-type en de haakjes rond de geneste lambda-expressie mogen we weglaten, omdat de pijl \texttt{-\textgreater } \textit{rechts-associatief} is:
+
+\begin{verbatim}
+addx :: Int -> Int -> Int
+addx = \ x -> \ y -> x + y
+\end{verbatim}
+
+De functie \texttt{addx} is nu eigenlijk een gewone functie met twee parameters. Als je alleen het eerste argument opgeeft, krijg je een functie die je later op het tweede argument kunt toepassen.
+
+Alle functies met twee of meer parameters kunnen we beschouwen als \textit{geneste lambda-expressies}. We kunnen de functies \textit{partieel parametriseren}, door deze toe te passen op 1 argument: we krijgen dan een functie die we later op de volgende argumenten kunnen toepassen.
+
+Het verschijnsel dat je functies met meerdere parameters kunt beschouwen als geneste lambda-expressies, die je partieel kunt parametriseren, heet Currying, naar de logicus Haskell (!) Curry. Je mag die dus nu bij zijn voornaam noemen.
+
+\begin{verbatim}
+addx :: Int -> (Int -> Int)
+addx x = \ y -> x + y
+\end{verbatim}
+
+\begin{verbatim}
+addtwo = addx 2
+\end{verbatim}
+
+\begin{verbatim}
+addtwo 3
+\end{verbatim}
+
+\begin{verbatim}
+5
+\end{verbatim}
+
+\begin{verbatim}
+addx 2 3
+\end{verbatim}
+
+\begin{verbatim}
+5
+\end{verbatim}
+
+Deze Currying kunnen we toepassen op alle functies en operatoren met twee of meer parameters, zoals ook bijvoorbeeld de normale reken-operatoren:
+
+\begin{verbatim}
+succ = (+) 1
+\end{verbatim}
+
+\begin{verbatim}
+succ 4
+\end{verbatim}
+
+\begin{verbatim}
+5
+\end{verbatim}
+
+We kunnen dit ook gebruiken om gespecialiseerde lijst-functies te maken, op basis van algemene lijstfuncties zoals \texttt{map} of \texttt{foldl}.
+
+\begin{verbatim}
+sum = foldl (+) 0
+\end{verbatim}
+
+\begin{verbatim}
+sum [1..10]
+\end{verbatim}
+
+\begin{verbatim}
+55
+\end{verbatim}
+
+\subsection{Functies in datastructuren}
+
+lijst met functies.

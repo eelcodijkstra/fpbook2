@@ -1,0 +1,6 @@
+# Voor de docent
+
+* **PRIMM** Als didactische aanpak gebruiken we, waar mogelijk, de PRIMM methode: Predict, Read, Investigate, Modify, Make. Leerlingen beginnen met het lezen en begrijpen van bestaande code.
+    * het is dan belangrijk om goede voorbeelden te kiezen.
+* **Gebruik voor implementatie.** In het algemeen proberen we voorbeelden van het gebruik te laten zien, voordat we ingaan op de implementatie.
+* **Kleine stappen, controleren.** We gebruiken Jupyter Notebook (of -Lab) om programma's op te kunnen bouwen in kleine stappen, waarbij elke stap getest kan worden met een of twee kleine voorbeelden.

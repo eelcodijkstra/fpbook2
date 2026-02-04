@@ -1,0 +1,169 @@
+\section{Overzicht}
+
+\bigskip\noindent
+\begin{tabular}{p{\dimexpr 0.333\linewidth-2\tabcolsep}p{\dimexpr 0.333\linewidth-2\tabcolsep}p{\dimexpr 0.333\linewidth-2\tabcolsep}}
+\toprule
+Hoofdstuk & onderdelen &  \\
+\hline
+1 & waarden, expressies en namen &  \\
+1 & functies: definitie en toepassing &  \\
+2 & typering, samengestelde waarden, lijsten &  \\
+2 & typering van functies &  \\
+3 & functies als waarden; map, fold &  \\
+4 & zelf-gedefinieerde data-types; functies daarvoor &  \\
+4 & geparametriseerde types; generieke functies &  \\
+5 & recursieve data-types; recursieve functies daarvoor &  \\
+6 & functies op lijsten; map, fold &  \\
+7 & bomen en de toepassingen daarvan &  \\
+7 & zoeken en sorteren &  \\
+8 & grotere voorbeelden &  \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+
+\subsection{Waarden, expressies en namen}
+
+\textbf{begrippen}: waarde, expressie, operator, operator-prioriteit (precedentie?), naam-definitie, naam-gebruik, rekenen/herschrijven (berekening)
+
+\begin{itemize}
+\item een expressie \textit{beschrijft} een berekening. Wanneer deze berekening uitgevoerd wordt, is het resultaat van deze berekening een \textit{waarde} (getal, string, enz.)
+\item een expressie bestaat uit waarden (voorlopig alleen gehele getallen), operatoren (en functies? bijv. div, mod?, abs, neg?, succ, pred)
+\item functie-toepassing heeft in Haskell de vorm: \texttt{f 3}
+
+\begin{itemize}
+\item de naam van de functie met daarachter het argument waarop de functie toegepast wordt.
+\item in plaats van \texttt{f(3)} (zoals gebruikelijk in veel andere programmeertalen, of in de wiskunde)
+\item functie-toepassing bindt sterker dan operatoren als \texttt{+}, \texttt{*}, enz.
+\end{itemize}
+\end{itemize}
+
+voorbeelden: enkele uitgewerkte berekeningen
+
+opdrachten: uitwerken van enkele berekeningen
+
+\subsection{Functies}
+
+\textbf{begrippen}: functie-definitie, functie-naam, parameters, functie-toepassing (applicatie, aanroep), argumenten
+
+\begin{itemize}
+\item een functie kun je zien als de \textit{abstractie} van een berekening: de interface beschrijft het effect(?), de expressie (body) de implementatie: de berekening voor het bereiken van dat effect.
+
+\begin{itemize}
+\item in het geval van functies kun je het effect beschrijven als een relatie tussen de parameters en het resultaat.
+\item een voorbeeld is ggd x y - het \textit{effect} is: het grootste getal dat zowel een deler is van x als van y; dit zegt nog niets over de manier waarop je dit kunt berekenen. (Dit is overigens een klassiek informatica-voorbeeld.)
+\item een ander voorbeeld: sort xs - het \textit{effect} is:
+\end{itemize}
+
+
+\item een functie kun je (ook) zien als een \textit{uitgestelde berekening}, vanwege het ontbreken van de waarden van de parameters. Zodra deze bekend zijn, bij functie-applicatie, kun je de berekening uitvoeren.
+\end{itemize}
+
+voorbeelden: \texttt{sqr} (definitie en toepassing), \texttt{succ} (en functies met twee parameters?)
+
+opdrachten: uitwerken van enkele berekeningen; def. van double
+
+\subsection{Types en waarden}
+
+begrippen:
+
+voorbeelden:
+
+\subsubsection{Elementaire types}
+
+concepten: typering van waarden; typering van functies
+
+Getallen, tekens, boolean
+
+voorbeelden:
+
+\subsubsection{Samengestelde types}
+
+Strings, lijsten; tupels
+
+\subsubsection{Typering van functies}
+
+(In het bijzonder ook: functies van meerdere parameters.)
+
+\subsection{Functies als waarden}
+
+\begin{itemize}
+\item anonieme functie-waarden: lambda-expressies
+
+\begin{itemize}
+\item (overeenkomst tussen lambda-expressie en regel voor functie-applicatie: \texttt{let})
+\end{itemize}
+
+
+\item map
+\item foldl, foldr, (reduce)
+\item filter
+\item zip (tupels en lijsten)
+\item functies met meerdere parameters; partiële parametrisatie (Currying)
+\end{itemize}
+
+(De uitdaging van het gebruik van map, foldl, filter enz. is om te denken in complete lijsten, niet in de afzonderlijke elementen.)
+
+(Bij dit hoofdstuk moeten we een redelijk groot aantal oefeningen hebben, om leerlingen vertrouwd te maken met de verschillende begrippen en de manier waarop je die gebruikt. Een aantal kleine voorbeelden moet met de hand uitgewerkt worden, voor een beter begrip.)
+
+\subsection{Zelf-gedefinieerde data-types}
+
+\begin{itemize}
+\item constructors (met parameters)
+\item functie-definities met \textit{pattern matching} (eigenlijk: ``de-constructie'')
+\item voorbeelden:
+
+\begin{itemize}
+\item grafische (geometrische vormen) - cirkel, rechthoek, driehoek, trapezium, ster?
+
+\begin{itemize}
+\item bepalen van oppervlakte
+\item
+\end{itemize}
+
+
+\item expressie - operator met operanden, (bijv. +, -. *. mod, div); functie met argumenten?
+(De voorbeelden in dit hoofdstuk bereiden voor op de ``logische'' uitbreiding naar groepering, en daarmee naar recursie.)
+\end{itemize}
+\end{itemize}
+
+(Eigenlijk zou ik de vormen zo willen definiëren dat je deze ook kunt tekenen; dan moeten we ook met coördinaten werken, bijvoorbeeld in de vorm van tupels.)
+
+\subsection{Recursie: data-types en functies}
+
+\begin{itemize}
+\item recursieve data-types
+
+\begin{itemize}
+\item grafische vormen - met groepering
+\item expressies - met sub-expressies
+\end{itemize}
+
+
+\item recursieve functies voor recursieve data
+
+\begin{itemize}
+\item grafische vormen, bijv. berekenen van oppervlak (of: omzetten in SVG)
+\item expressies, bijv. evaluatie
+\end{itemize}
+
+
+\item binaire bomen
+\item generieke bomen (met willekeurig aantal kinderen)
+\item bomen in de informatica
+
+\begin{itemize}
+\item recursieve structuren (o.a file system; en eerdere genoemde voorbeelden)
+\item zoekbomen
+\end{itemize}
+
+
+\item lijsten - en functies op lijsten (sum, max, lst\_sqr)
+\end{itemize}
+
+\subsection{Generieke functies (map enz.)}
+
+\begin{itemize}
+\item definities van map, foldl (en foldr)
+\item (en nog enkele andere functies)
+\end{itemize}

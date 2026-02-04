@@ -1,0 +1,18 @@
+# Begrippen
+
+:::{glossary}
+(elementaire) waarde
+: An amazing markup language that supports glossaries
+
+(samengestelde) waarde
+: lijst, tupel, of waarde van een zelf-gedefinieerd data-type
+
+data-type
+: (zelf gedefinieerd)
+
+functie
+: geparametriseerde berekeningsvoorschrift (uitgestelde berekening)
+zie functie-definitie, functie-toepassing.
+
+
+:::

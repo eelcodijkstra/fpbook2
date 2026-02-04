@@ -1,0 +1,51 @@
+\section{Een voorproefje van functioneel programmeren in Haskell}
+
+Je kunt Haskell als een rekenmachine gebruiken: je kunt expressies invoeren in de gebruikelijke notatie.
+
+Denk erom dat je, zoals in alle programmeertalen, vermenigvuldiging altijd moet uitschrijven met de \texttt{*}=operator.
+
+\begin{verbatim}
+3 + 4
+\end{verbatim}
+
+\begin{verbatim}
+7
+\end{verbatim}
+
+\begin{verbatim}
+3 + 4 * 5
+\end{verbatim}
+
+\begin{verbatim}
+(3 + 4) * 5
+\end{verbatim}
+
+Je kunt een waarde ook een naam geven, en die naam gebruiken op de plek van een waarde in een expressie:
+
+\begin{verbatim}
+a = 3
+\end{verbatim}
+
+\begin{verbatim}
+a + 4
+\end{verbatim}
+
+Naast getallen als waarde kun je ook tekens (\textit{chars}) en \textit{strings} gebruiken. (Later)
+
+Een functie-definitie ziet er vrijwel net zo uit als in de wiskunde:
+
+\begin{verbatim}
+sqr x = x * x
+\end{verbatim}
+
+Als je nu de waarde van \texttt{sqr} opvraagt, krijg een foutmelding: je kunt een functie-waarde niet afdrukken.
+
+\begin{verbatim}
+sqr
+\end{verbatim}
+
+De aanroep (de ``applicatie'' ofwel het gebruik) van een functie schrijf je als de naam van de functie direct gevolgd door het argument. Je hebt geen haakjes nodig.
+
+\begin{verbatim}
+sqr 3
+\end{verbatim}
